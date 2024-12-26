@@ -7,6 +7,7 @@ export const load: PageServerLoad = async (event) => {
 	const bathroom = syncBathroom(event.cookies);
 
 	return {
+		title: 'bathroom',
 		bathroom
 	};
 };

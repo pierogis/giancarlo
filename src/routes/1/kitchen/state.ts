@@ -46,4 +46,8 @@ export const defaultKitchen: Kitchen = {
 
 const kitchenCookieName = 'gc_kitchen';
 
-export const syncKitchen = syncer(kitchenCookieName, defaultKitchen, PAGES['1_kitchen']);
+export const { sync: syncKitchen, delete: deleteKitchen } = syncer(
+	kitchenCookieName,
+	defaultKitchen,
+	PAGES['1_kitchen']
+);

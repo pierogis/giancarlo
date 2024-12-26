@@ -13,7 +13,7 @@ export const defaultLizardZone: LizardZone = {
 
 const lizardZoneCookieName = 'gc_lizard_zone';
 
-export const syncLizardZone = syncer(
+export const { sync: syncLizardZone, delete: deleteLizardZone } = syncer(
 	lizardZoneCookieName,
 	defaultLizardZone,
 	PAGES['1_auxilliary_living_room_lizard_zone']

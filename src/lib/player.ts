@@ -36,4 +36,8 @@ export const defaultPlayer: Player = {
 
 export const playerCookieName = 'gc_player';
 
-export const syncPlayer = syncer(playerCookieName, defaultPlayer, PAGES._ROOT);
+export const { sync: syncPlayer, delete: deletePlayer } = syncer(
+	playerCookieName,
+	defaultPlayer,
+	PAGES._ROOT
+);

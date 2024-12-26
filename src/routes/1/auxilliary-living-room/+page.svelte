@@ -12,6 +12,12 @@
 </h3>
 
 <p>
+	After a long and arduous journey, you find yourself on the precipice of the the <u
+		>Auxilliary Living Room</u
+	>.
+</p>
+
+<p>
 	Two shabby looking cardboard boxes stand offset from the wall in the <u>Auxilliary Living Room</u
 	>: <a href={PAGES['1_auxilliary_living_room_hotel']}>Giancarlo's Hotel</a>. At your other flank is
 	the
@@ -21,7 +27,7 @@
 	and
 	<a href={PAGES['1_bathroom']}>Bathroom</a>. A <u>Dust–Collecting Domino Set</u> collects dust on
 	the coffee table. Because this <u>Living Room</u> is generally considered <u>Auxilliary</u>, you
-	could also return to the <a href={PAGES['1_living_room']}>Living Room</a>
+	could also return to the <a href={PAGES['1_living_room']}>Living Room</a>.
 </p>
 
 <p>
@@ -41,18 +47,23 @@
 		for <b>{data.hoursSinceStart}</b>
 		hours.
 	</p>
-
-	<form action={ACTIONS.regardLizard_1_auxilliary_living_room} method="POST" use:enhance>
-		<button>Check out <u>The Lizard</u></button>
-	</form>
-
-	<p>
-		<a href={PAGES['1_auxilliary_living_room_lizard_zone']}>Talk to <u>The Lizard</u></a>
-	</p>
 {/if}
+
+<form action={ACTIONS.regardLizard_1_auxilliary_living_room} method="POST" use:enhance>
+	<button>Check out <u>The Lizard</u></button>
+</form>
 
 <hr />
 
 <p>
-	<a href={PAGES['1_auxilliary_living_room_hotel']}>Check in at Giancarlo's Hotel</a>
+	Excuse yourself to <a href={PAGES['1_bathroom']}>The Bathroom ^</a>
+</p>
+<p>
+	Talk to <a href={PAGES['1_auxilliary_living_room_lizard_zone']}>The Lizard ></a>
+</p>
+<p>
+	Check in at <a href={PAGES['1_auxilliary_living_room_hotel']}>{"Giancarlo's Hotel \<"}</a>
+</p>
+<p>
+	Return to the <a href={PAGES['1_living_room']}>Living Room v</a>
 </p>

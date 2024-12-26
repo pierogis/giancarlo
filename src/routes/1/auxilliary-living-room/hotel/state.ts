@@ -19,7 +19,7 @@ export const defaultHotel = {
 
 const hotelCookieName = 'gc_hotel';
 
-export const syncHotel = syncer(
+export const { sync: syncHotel, delete: deleteHotel } = syncer(
 	hotelCookieName,
 	defaultHotel,
 	PAGES['1_auxilliary_living_room_hotel']

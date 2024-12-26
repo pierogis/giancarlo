@@ -36,6 +36,7 @@ export const ACTIONS = {
 	regardLizard_1_auxilliary_living_room: `/1/auxilliary-living-room?/regardLizard`,
 	pickUp_1_auxilliary_living_room_hotel: `/1/auxilliary-living-room/hotel?/pickUp`,
 	talkToLizard_1_auxilliary_living_room_lizard_zone: `/1/auxilliary-living-room/lizard-zone?/talkToLizard`,
+	giveLizardLettuce_1_auxilliary_living_room_lizard_zone: `/1/auxilliary-living-room/lizard-zone?/giveLizardLettuce`,
 	ignoreLizard_1_auxilliary_living_room_lizard_zone: `/1/auxilliary-living-room/lizard-zone?/ignoreLizard`,
 	observe_1_bathroom: `/1/bathroom?/observe`,
 	regardPantry_1_bathroom: `/1/bathroom?/regardPantry`,
@@ -43,6 +44,7 @@ export const ACTIONS = {
 	regardCabinet_1_bathroom: `/1/bathroom?/regardCabinet`,
 	grabToothbrush_1_bathroom: `/1/bathroom?/grabToothbrush`,
 	takeOffShoes_1_door: `/1/door?/takeOffShoes`,
+	putOnShoes_1_door: `/1/door?/putOnShoes`,
 	open_1_door: `/1/door?/open`,
 	close_1_door: `/1/door?/close`,
 	enter_1_door: `/1/door?/enter`,
@@ -166,6 +168,7 @@ export type KIT_ROUTES = {
 		regardLizard_1_auxilliary_living_room: never;
 		pickUp_1_auxilliary_living_room_hotel: never;
 		talkToLizard_1_auxilliary_living_room_lizard_zone: never;
+		giveLizardLettuce_1_auxilliary_living_room_lizard_zone: never;
 		ignoreLizard_1_auxilliary_living_room_lizard_zone: never;
 		observe_1_bathroom: never;
 		regardPantry_1_bathroom: never;
@@ -173,6 +176,7 @@ export type KIT_ROUTES = {
 		regardCabinet_1_bathroom: never;
 		grabToothbrush_1_bathroom: never;
 		takeOffShoes_1_door: never;
+		putOnShoes_1_door: never;
 		open_1_door: never;
 		close_1_door: never;
 		enter_1_door: never;

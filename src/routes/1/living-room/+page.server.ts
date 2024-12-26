@@ -7,6 +7,7 @@ export const load: PageServerLoad = async (event) => {
 	const livingRoom = syncLivingRoom(event.cookies);
 
 	return {
+		title: 'living room',
 		livingRoom
 	};
 };
@@ -17,8 +18,6 @@ export const actions: Actions = {
 			livingRoom.observed = true;
 			return livingRoom;
 		});
-
-		return {};
 	},
 	takeOffShoes: (event) => {
 		syncPlayer(event.cookies, (player) => {
@@ -29,8 +28,6 @@ export const actions: Actions = {
 			livingRoom.inventory.shoes += 2;
 			return livingRoom;
 		});
-
-		return {};
 	},
 	putOnShoes: (event) => {
 		syncPlayer(event.cookies, (player) => {
@@ -41,31 +38,23 @@ export const actions: Actions = {
 			livingRoom.inventory.shoes -= 2;
 			return livingRoom;
 		});
-
-		return {};
 	},
 	regardLizard: (event) => {
 		syncLivingRoom(event.cookies, (livingRoom) => {
 			livingRoom.lizardZone.regarded = true;
 			return livingRoom;
 		});
-
-		return {};
 	},
 	regardChair: (event) => {
 		syncLivingRoom(event.cookies, (livingRoom) => {
 			livingRoom.chair.regarded = true;
 			return livingRoom;
 		});
-
-		return {};
 	},
 	inspectRug: (event) => {
 		syncLivingRoom(event.cookies, (livingRoom) => {
 			livingRoom.rug.inspections += 1;
 			return livingRoom;
 		});
-
-		return {};
 	}
 };

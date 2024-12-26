@@ -43,4 +43,8 @@ export const defaultDoor: Door = {
 
 export const doorCookieName = 'gc_door';
 
-export const syncDoor = syncer(doorCookieName, defaultDoor, PAGES['1_door']);
+export const { sync: syncDoor, delete: deleteDoor } = syncer(
+	doorCookieName,
+	defaultDoor,
+	PAGES['1_door']
+);

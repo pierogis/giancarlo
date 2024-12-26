@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { ACTIONS, PAGES } from '$lib/ROUTES';
+	import { fade } from 'svelte/transition';
 
-	const { data } = $props();
+	const { data, form } = $props();
 
 	const player = $derived(data.player);
 	const lizardZone = $derived(data.lizardZone);
@@ -13,14 +14,9 @@
 </h3>
 
 <p>
-	Given that the lizard has been roasting for 30 hours, you calculate that it has been 1 day and 6
-	hours since he was turned on at the start of the day yesterday.. making it 6pm.
-</p>
-
-<p>Ominous.. these are witching hours for the cat.</p>
-
-<p>
-	<a href={PAGES['1_auxilliary_living_room']}>Return to the <u>Auxilliary Living Room</u></a>
+	Given the width of <u>The Lizard</u>, you calculate that he has been roasting for
+	<b>{data.hoursSinceStart} hours</b>
+	since he was turned on.. making it the witching hours for the cat.. ominous.
 </p>
 
 <hr />
@@ -30,44 +26,60 @@
 		action={ACTIONS.talkToLizard_1_auxilliary_living_room_lizard_zone}
 		method="POST"
 		use:enhance
+		in:fade
 	>
-		<button
-			onclick={() => {
-				lizardZone.talkedTo = true;
-				player.inventory.lizardAdvice += 1;
-			}}
-		>
+		<button>
 			Talk to <u>The Lizard</u>
 		</button>
 	</form>
 {:else}
-	<p><i>You talked to <u>The Lizard.</u></i></p>
-	<p><i>You put <u>Lizard Advice</u> in your Inventory.</i></p>
+	<p in:fade><i>You talked to <u>The Lizard.</u></i></p>
 
-	<p>
+	<p in:fade>
 		<u>The Lizard</u> opens his mouth. He says, "You have sexed me incorrectly; you can tell by inspecting
 		my gonads".
 	</p>
-	<p>It's dubious, you probably hallucinated that.</p>
+	<p in:fade>It's dubious, you probably hallucinated that.</p>
+	{#if player.inventory.lettuce.chopped > 0}
+		<form
+			action={ACTIONS.giveLizardLettuce_1_auxilliary_living_room_lizard_zone}
+			method="POST"
+			use:enhance
+			in:fade
+		>
+			<button>Give <u>The Lizard</u> some <u>Chopped Lettuce</u></button>
+		</form>
+	{/if}
 	{#if !lizardZone.ignored}
 		<form
 			action={ACTIONS.ignoreLizard_1_auxilliary_living_room_lizard_zone}
 			method="POST"
 			use:enhance
+			in:fade
 		>
-			<button
-				onclick={() => {
-					lizardZone.ignored = true;
-				}}
-			>
-				That was a waste of time
-			</button>
+			<button>That was a waste of time</button>
 		</form>
 	{/if}
 {/if}
 
 {#if lizardZone.ignored}
 	<hr />
-	<p><i>You ignored <u>The Lizard</u>.</i></p>
-	<p>Suddenly, something stirs in the <u>Laboratory of Animal Cruelty</u>.</p>
+	<p in:fade><i>You ignored <u>The Lizard</u>.</i></p>
+	<p in:fade>Suddenly, something stirs in the <u>Laboratory of Animal Cruelty</u>.</p>
 {/if}
+
+<hr />
+{#if form?.messages && form.messages.length > 0}
+	{#each form.messages || [] as message}
+		<p in:fade><i>{message}</i></p>
+	{/each}
+	<hr />
+{/if}
+
+<p>
+	Recoup in the <a href={PAGES['1_auxilliary_living_room']}>{'Auxilliary Living Room \<'}</a>
+</p>
+
+<p>
+	Check in at <a href={PAGES['1_auxilliary_living_room_hotel']}>{"Giancarlo's Hotel \<"}</a>
+</p>

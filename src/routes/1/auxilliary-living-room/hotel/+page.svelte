@@ -25,28 +25,32 @@
 
 <p>
 	The boxes are vertically joined by blue painter's tape, and you can see a cutout on the upper box.
-	Perhaps a turret slit for the beast to launch his beastly <u>Stink Attack</u>s. {#if hotelHasInventory}
+	Perhaps a turret slit in a <u>Forward Operating Base</u> for the <u>Beast</u> to launch his
+	beastly <u>Stink Attack</u>s. {#if hotelHasInventory}
 		On top of the box are {#if hotelHasBirds}
-			{hotel.inventory.tweetyBirds}
-			<u>Tweety Bird</u
-			>{#if hotel.inventory.tweetyBirds > 1}s{/if}{#if hotelHasBalls && hotelHasFish},{/if}
+			<b>
+				{hotel.inventory.tweetyBirds}
+				<u>Tweety Bird</u>{#if hotel.inventory.tweetyBirds > 1}s{/if}
+			</b>
+			{#if hotelHasBalls && hotelHasFish},{/if}
 		{/if}
 		{#if hotelHasBalls}
 			{#if hotel.inventory.crinkleFish <= 0}and{/if}
-			{hotel.inventory.balls}
-			<u>1-Inch ⌀ Ball</u
-			>{#if hotel.inventory.balls > 1}s{/if}{#if hotelHasBirds && hotelHasFish},{/if}
+
+			<b>
+				{hotel.inventory.balls}
+				<u>1-Inch ⌀ Ball</u>
+			</b>{#if hotel.inventory.balls > 1}s{/if}{#if hotelHasBirds && hotelHasFish},{/if}
 		{/if}
 		{#if hotelHasFish}
 			{#if hotelHasBirds && hotelHasBalls}and{/if}
-			{hotel.inventory.crinkleFish} <u>Catnip Infused Crinkle Fish</u>
-		{/if}
+			<b>{hotel.inventory.crinkleFish} <u>Catnip Infused Crinkle Fish</u></b>
+		{/if}.
 	{/if}
 </p>
 {#if hotelHasInventory}
-	<p>Your beast wrangling instincts tell you that you may need them.</p>
+	<p>Your beast wrangling instincts and inner monologue tell you that you may need them.</p>
 {/if}
-
 <hr />
 
 {#if hotelHasBirds}
@@ -73,7 +77,7 @@
 	<form action={ACTIONS.pickUp_1_auxilliary_living_room_hotel} method="POST" use:enhance>
 		<input hidden name="item" value="fish" />
 		<button>
-			Pick up catnip infused <u>Crinkle Fish</u>
+			Pick up <u>Catnip Infused Crinkle Fish</u>
 		</button>
 	</form>
 	<hr />
@@ -85,11 +89,13 @@
 	{/each}
 	<hr />
 {/if}
-<hr />
 
 <p>
-	<a href={PAGES['1_auxilliary_living_room_lizard_zone']}>Talk to <u>The Lizard</u></a>
+	Talk to <a href={PAGES['1_auxilliary_living_room_lizard_zone']}>The Lizard ></a>
 </p>
 <p>
-	<a href={PAGES['1_bathroom']}>Excuse yourself to <u>The Bathroom</u></a>
+	Excuse yourself to <a href={PAGES['1_bathroom']}>The Bathroom ^</a>
+</p>
+<p>
+	Recoup in the <a href={PAGES['1_auxilliary_living_room']}>Auxilliary Living Room v</a>
 </p>

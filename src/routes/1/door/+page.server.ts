@@ -7,6 +7,7 @@ export const load: PageServerLoad = async (event) => {
 	const door = syncDoor(event.cookies);
 
 	return {
+		title: 'Doorway to the Soul',
 		door
 	};
 };
@@ -22,7 +23,23 @@ export const actions: Actions = {
 			return door;
 		});
 
-		return {};
+		return {
+			messages: ['You removed Shoes from your inventory.']
+		};
+	},
+	putOnShoes: (event) => {
+		syncPlayer(event.cookies, (player) => {
+			player.inventory.shoes += 2;
+			return player;
+		});
+		syncDoor(event.cookies, (door) => {
+			door.inventory.shoes -= 2;
+			return door;
+		});
+
+		return {
+			messages: ['You removed Shoes from your inventory.']
+		};
 	},
 	open: (event) => {
 		syncDoor(event.cookies, (door) => {
@@ -62,7 +79,9 @@ export const actions: Actions = {
 			return door;
 		});
 
-		return {};
+		return {
+			messages: ["Giancarlo didn't like that."]
+		};
 	},
 	regardDeadbolt: (event) => {
 		syncDoor(event.cookies, (door) => {
@@ -86,7 +105,7 @@ export const actions: Actions = {
 			return door;
 		});
 
-		return {};
+		return { messages: ["The deadbolt sticks and won't turn."] };
 	},
 	tryDeadboltTeethDown: (event) => {
 		syncDoor(event.cookies, (door) => {
@@ -94,7 +113,7 @@ export const actions: Actions = {
 			return door;
 		});
 
-		return {};
+		return { messages: ["The key won't fit."] };
 	},
 	tryKnobLockTeethUp: (event) => {
 		syncDoor(event.cookies, (door) => {
@@ -102,16 +121,20 @@ export const actions: Actions = {
 			return door;
 		});
 
-		return {};
+		return { messages: ["The key won't fit."] };
 	},
 	tryKnobLockTeethDown: (event) => {
-		syncDoor(event.cookies, (door) => {
+		const door = syncDoor(event.cookies, (door) => {
 			door.knobLock.triedTeethDown = true;
 			door.locked = !door.locked;
 
 			return door;
 		});
 
-		return {};
+		if (door.locked) {
+			return { messages: ['The key fits and you lock the door. It was already unlocked.'] };
+		} else {
+			return { messages: ['The key fits and you unlock the door.'] };
+		}
 	}
 };

@@ -17,7 +17,7 @@
 <p>
 	You find yourself in the <u>Kitchen</u> behind you is the
 	<a href={PAGES['1_laboratory']}>Laboratory of Animal Cruelty</a>
-	and the <a href={PAGES['1_bathroom']}>Bathroom</a>. Ahead of you you can see a <u>Window</u>.
+	and the <a href={PAGES['1_bathroom']}>Bathroom</a>. Ahead of you, you can see a <u>Window</u>.
 </p>
 
 <hr />
@@ -52,11 +52,11 @@
 {/if}
 
 <p>
-	<a href={PAGES['1_bathroom']}>Get the scoop in the <u>Bathroom</u></a>
+	Get the scoop in the <a href={PAGES['1_bathroom']}>Bathroom v</a>
 </p>
 <p>
-	<a href={PAGES['1_laboratory']}>Test your luck at the <u>Laboratory of Animal Cruelty</u></a>
+	Test your luck at the <a href={PAGES['1_laboratory']}>Laboratory of Animal Cruelty v</a>
 </p>
 <p>
-	<a href={PAGES['1_auxilliary_living_room']}>Recoup in the <u>Auxilliary Living Room</u></a>
+	Recoup in the <a href={PAGES['1_auxilliary_living_room']}>Auxilliary Living Room v</a>
 </p>

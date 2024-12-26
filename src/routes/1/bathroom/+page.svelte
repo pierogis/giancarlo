@@ -19,8 +19,8 @@
 		In the <u>Bathroom</u>, you look down and find a <u>Litter Box</u> bestinked. It reminds you of
 		the
 		<u>Terrible Aura Omitted from the Rug beneath the Couch</u>. As for the rest of the
-		<u>Bathroom</u>, the shower is running, and the <u>Cabinet</u> and <u>Pantry</u> shimmer with the
-		promise of inventory–addable items.
+		<u>Bathroom</u>, the shower is running with a man inside, and the <u>Cabinet</u> and
+		<u>Pantry</u> shimmer with the promise of inventory–addable items.
 	</p>
 {:else}
 	<form action={ACTIONS.observe_1_bathroom} method="POST" use:enhance>
@@ -33,6 +33,7 @@
 <hr />
 
 {#if bathroom.observed}
+	<h4>Pantry</h4>
 	{#if bathroom.pantry.regarded}
 		<p><i>You regarded the <u>Pantry</u></i></p>
 
@@ -51,6 +52,7 @@
 	{/if}
 	<hr />
 
+	<h4>Cabinet</h4>
 	{#if bathroom.cabinet.regarded}
 		<p><i>You regarded the <u>Cabinet</u></i></p>
 		<p>
@@ -83,11 +85,11 @@
 {/if}
 
 <p>
-	<a href={PAGES['1_kitchen']}>Visit the <u>Kitchen</u></a>
+	Chop it up in the <a href={PAGES['1_kitchen']}>Kitchen ^</a>
 </p>
 <p>
-	<a href={PAGES['1_laboratory']}>Visit the <u>Laboratory of Animal Cruelty</u></a>
+	Test your luck at the <a href={PAGES['1_laboratory']}>Laboratory of Animal Cruelty ></a>
 </p>
 <p>
-	<a href={PAGES['1_auxilliary_living_room_hotel']}>Visit the <u>Hotel</u></a>
+	Recoup in the <a href={PAGES['1_auxilliary_living_room']}>Auxilliary Living Room v</a>
 </p>

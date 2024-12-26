@@ -15,7 +15,7 @@ export const defaultAuxilliaryLivingRoom: AuxilliaryLivingRoom = {
 
 const auxilliaryLivingRoomCookieName = 'gc_auxilliary_living_room';
 
-export const syncAuxilliaryLivingRoom = syncer(
+export const { sync: syncAuxilliaryLivingRoom, delete: deleteAuxilliaryLivingRoom } = syncer(
 	auxilliaryLivingRoomCookieName,
 	defaultAuxilliaryLivingRoom,
 	PAGES['1_auxilliary_living_room']

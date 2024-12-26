@@ -7,7 +7,9 @@ declare global {
 			resumePathname: string | undefined;
 			player: Player;
 		}
-		// interface PageData {}
+		interface PageData {
+			title?: string;
+		}
 		// interface PageState {}
 		// interface Platform {}
 	}

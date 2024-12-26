@@ -68,7 +68,9 @@
 			<u>Hotel</u>. Further down the hallway, well.. let's not mention it.
 		</p>
 
-		<a href={PAGES['1_auxilliary_living_room']}>Visit the <u>Auxilliary Living Room</u></a>
+		<p>
+			Recoup in the <a href={PAGES['1_auxilliary_living_room']}>Auxilliary Living Room ^</a>
+		</p>
 	{:else}
 		<form action={ACTIONS.regardLizard_1_living_room} method="POST" use:enhance>
 			<button>
@@ -86,7 +88,9 @@
 			begs you to take a load off.
 		</p>
 
-		<a href={PAGES['1_living_room_poäng']}>Talk to the <u>IKEA POÄNG</u> chair</a>
+		<p>
+			Talk to the <a href={PAGES['1_living_room_poäng']}>IKEA POÄNG ></a> chair
+		</p>
 	{:else}
 		<form action={ACTIONS.regardChair_1_living_room} method="POST" use:enhance>
 			<button>

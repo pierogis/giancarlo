@@ -34,4 +34,8 @@ export const defaultBathroom: Bathroom = {
 
 const bathroomCookieName = 'gc_bathroom';
 
-export const syncBathroom = syncer(bathroomCookieName, defaultBathroom, PAGES['1_bathroom']);
+export const { sync: syncBathroom, delete: deleteBathroom } = syncer(
+	bathroomCookieName,
+	defaultBathroom,
+	PAGES['1_bathroom']
+);
