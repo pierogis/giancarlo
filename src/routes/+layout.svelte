@@ -9,6 +9,9 @@
 
 <svelte:head>
 	<title>{page.data.title || "Giancarlo's Tale"}</title>
+	<link rel="icon" type="image/png" sizes="32x32" href="%sveltekit.assets%/favicon-32x32.png" />
+	<link rel="icon" type="image/png" sizes="16x16" href="%sveltekit.assets%/favicon-16x16.png" />
+	<link rel="icon" type="image/svg+xml" href="%sveltekit.assets%/favicon.svg" />
 	<meta
 		name="description"
 		content={page.data.description ||

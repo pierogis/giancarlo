@@ -48,6 +48,7 @@
 {/if}
 {#if giancarlo.caught}
 	<p><b>You are holding <u>Giancarlo</u>! Congratulations!</b></p>
+	<img src="/gc.png" width={500} height={500} alt="giancarlo standing" />
 	<div class="forms">
 		{#if player.inventory.toothbrushes > 0}
 			<form action={ACTIONS.brushCatTeeth_1} method="POST" use:enhance>

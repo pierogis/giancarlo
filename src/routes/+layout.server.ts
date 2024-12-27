@@ -14,10 +14,6 @@ export const load: LayoutServerLoad = async ({ locals, url }) => {
 	happinessBonus -= locals.state.player.emotions.drunkenness;
 	const giancarloCatchChance = (locals.state.giancarlo.happiness + happinessBonus + 25) / 100;
 
-	console.log(locals.state.giancarlo.happiness);
-	console.log(happinessBonus);
-	console.log(giancarloCatchChance);
-
 	return {
 		state: locals.state,
 		statusView,
