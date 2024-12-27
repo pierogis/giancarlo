@@ -24,12 +24,12 @@
 		>
 	</p>
 	<div>
-		<form action={ACTIONS.tryDeadboltTeethUp_1_doorway} method="POST" use:enhance class="try">
+		<form action={ACTIONS.tryDeadboltTeethUp_1_doorway} method="POST" use:enhance>
 			<button>
 				Try the <u>deadbolt</u> with teeth facing up
 			</button>
 		</form>
-		<form action={ACTIONS.tryDeadboltTeethDown_1_doorway} method="POST" use:enhance class="try">
+		<form action={ACTIONS.tryDeadboltTeethDown_1_doorway} method="POST" use:enhance>
 			<button>
 				Try the <u>deadbolt</u> with teeth facing down
 			</button>
@@ -38,7 +38,10 @@
 {/if}
 
 <style>
-	.try {
-		display: inline;
+	div {
+		display: flex;
+		gap: 8px;
+		text-wrap: nowrap;
+		flex-wrap: wrap;
 	}
 </style>

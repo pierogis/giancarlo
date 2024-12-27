@@ -47,9 +47,6 @@ button {
 	font-family: monospace;
 }
 
-button:hover {
-	background-color: lightblue;
-}
 button:active {
 	transform: translateY(1px);
 }
@@ -74,6 +71,9 @@ td {
 	padding: 4px;
 }
 
-.inline {
-	display: inline;
+.forms {
+	display: flex;
+	gap: 8px;
+	text-wrap: nowrap;
+	flex-wrap: wrap;
 }

@@ -35,34 +35,29 @@
 			</i>
 		</p>
 
-		{#if refridgerator.inventory.beer > 0}
-			<form action={ACTIONS.drinkBeer_1_kitchen} method="POST" use:enhance class="inline">
-				<button>
-					Drink the <u>Beer</u>
-				</button>
-			</form>
-
-			{#if refridgerator.inventory.lettuce.raw <= 0}
-				<br />
-				<br />
+		<div class="forms">
+			{#if refridgerator.inventory.beer > 0}
+				<form action={ACTIONS.drinkBeer_1_kitchen} method="POST" use:enhance>
+					<button>
+						Drink the <u>Beer</u>
+					</button>
+				</form>
 			{/if}
-		{/if}
 
-		{#if refridgerator.inventory.lettuce.raw > 0}
-			<form action={ACTIONS.takeLettuce_1_kitchen} method="POST" use:enhance class="inline">
+			{#if refridgerator.inventory.lettuce.raw > 0}
+				<form action={ACTIONS.takeLettuce_1_kitchen} method="POST" use:enhance>
+					<button>
+						Take the <u>Raw Lettuce</u>
+					</button>
+				</form>
+			{/if}
+
+			<form action={ACTIONS.closeRefridgerator_1_kitchen} method="POST" use:enhance>
 				<button>
-					Take the <u>Raw Lettuce</u>
+					Close the <u>Refridgerator</u>
 				</button>
 			</form>
-			<br />
-			<br />
-		{/if}
-
-		<form action={ACTIONS.closeRefridgerator_1_kitchen} method="POST" use:enhance>
-			<button>
-				Close the <u>Refridgerator</u>
-			</button>
-		</form>
+		</div>
 	{/if}
 {:else}
 	<form action={ACTIONS.regardRefridgerator_1_kitchen} method="POST" use:enhance>

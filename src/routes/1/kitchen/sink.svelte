@@ -29,18 +29,20 @@
 		</form>
 	{:else}
 		<p><i>The <u>Faucet</u> is running.</i></p>
-		{#if inventory.lettuce.raw > 0}
-			<form action={ACTIONS.washLettuce_1_kitchen} method="POST" use:enhance class="inline">
+		<div class="forms">
+			{#if inventory.lettuce.raw > 0}
+				<form action={ACTIONS.washLettuce_1_kitchen} method="POST" use:enhance>
+					<button>
+						Wash the <u>Raw Lettuce</u>
+					</button>
+				</form>
+			{/if}
+			<form action={ACTIONS.turnOffFaucet_1_kitchen} method="POST" use:enhance>
 				<button>
-					Wash the <u>Raw Lettuce</u>
+					Turn off the <u>Faucet</u>
 				</button>
 			</form>
-		{/if}
-		<form action={ACTIONS.turnOffFaucet_1_kitchen} method="POST" use:enhance class="inline">
-			<button>
-				Turn off the <u>Faucet</u>
-			</button>
-		</form>
+		</div>
 	{/if}
 {:else}
 	<form action={ACTIONS.regardSink_1_kitchen} method="POST" use:enhance>

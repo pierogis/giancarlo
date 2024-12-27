@@ -56,6 +56,8 @@
 {/if}
 
 {#if doorway.locked || !doorway.knobLock.regarded || !doorway.knobLock.triedTeethDown}
+	<p><i>The <u>Door</u> is locked.</i></p>
+
 	<Deadbolt {doorway}></Deadbolt>
 
 	<KnobLock {doorway}></KnobLock>
@@ -112,9 +114,8 @@
 
 {#if doorway.greeted}
 	<p>
-		Giancarlo runs to his <a href={PAGES['1_laboratory']({ statusView: data.statusView })}
-			>Laboratory of Animal Cruelty</a
-		>, plotting retribution for the intrusion, surely.
+		Giancarlo runs to his <u>Laboratory of Animal Cruelty</u>, plotting retribution for the
+		intrusion, surely.
 	</p>
 {/if}
 

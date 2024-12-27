@@ -6,8 +6,21 @@ export const load: LayoutServerLoad = async ({ locals, url }) => {
 		| 'player'
 		| 'giancarlo';
 
+	let happinessBonus = 0;
+	if (locals.state.player.inventory.shoes < 1) {
+		happinessBonus += 5;
+	}
+	happinessBonus += locals.state.player.emotions.allergyResistance / 10;
+	happinessBonus -= locals.state.player.emotions.drunkenness;
+	const giancarloCatchChance = (locals.state.giancarlo.happiness + happinessBonus + 25) / 100;
+
+	console.log(locals.state.giancarlo.happiness);
+	console.log(happinessBonus);
+	console.log(giancarloCatchChance);
+
 	return {
 		state: locals.state,
-		statusView
+		statusView,
+		giancarloCatchPercentage: Math.round(giancarloCatchChance * 100)
 	};
 };

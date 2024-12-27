@@ -25,9 +25,7 @@ export const actions: Actions = {
 
 				happinessBonus -= state.player.emotions.drunkenness;
 
-				const caught = (state.giancarlo.happiness + happinessBonus) / 50 > Math.random() - 0.5;
-
-				console.log(caught);
+				const caught = (state.giancarlo.happiness + happinessBonus + 50) / 100 > Math.random();
 
 				state.giancarlo.happiness -= 10;
 				if (caught) {

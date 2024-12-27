@@ -13,6 +13,7 @@
 </script>
 
 {#if doorway.knobLock.regarded === false}
+	<br />
 	<form action={ACTIONS.regardKnobLock_1_doorway} method="POST" use:enhance>
 		<button>Try the <u>knob lock</u></button>
 	</form>
@@ -22,20 +23,16 @@
 			>You have a key to the knob lock, but you can't remember if the teeth go in facing up or down.</i
 		>
 	</p>
-	<form action={ACTIONS.tryKnobLockTeethUp_1_doorway} method="POST" use:enhance class="try">
-		<button>
-			Try the <u>knob lock</u> with teeth facing up
-		</button>
-	</form>
-	<form action={ACTIONS.tryKnobLockTeethDown_1_doorway} method="POST" use:enhance class="try">
-		<button>
-			Try the <u>knob lock</u> with teeth facing down
-		</button>
-	</form>
+	<div class="forms">
+		<form action={ACTIONS.tryKnobLockTeethUp_1_doorway} method="POST" use:enhance>
+			<button>
+				Try the <u>knob lock</u> with teeth facing up
+			</button>
+		</form>
+		<form action={ACTIONS.tryKnobLockTeethDown_1_doorway} method="POST" use:enhance>
+			<button>
+				Try the <u>knob lock</u> with teeth facing down
+			</button>
+		</form>
+	</div>
 {/if}
-
-<style>
-	.try {
-		display: inline;
-	}
-</style>

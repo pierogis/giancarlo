@@ -5,7 +5,7 @@ export const load: PageServerLoad = async () => {
 	return {
 		title: 'auxilliary living room',
 		description:
-			'After a long and arduous journey, you find yourself on the precipice of the the Auxilliary Living Room.'
+			'After a long and arduous journey, you find yourself on the precipice of the Auxilliary Living Room.'
 	};
 };
 

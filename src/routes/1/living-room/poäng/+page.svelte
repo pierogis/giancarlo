@@ -70,7 +70,8 @@
 	</form>
 {/if}
 
-<GrabTheCat {player} {giancarlo} location="chair"></GrabTheCat>
+<GrabTheCat {player} {giancarlo} catchPercentage={data.giancarloCatchPercentage} location="chair"
+></GrabTheCat>
 <br />
 
 <Destinations>

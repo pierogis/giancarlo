@@ -25,7 +25,7 @@
 </p>
 
 <p>
-	In your peripheral, you can see that the door to the <u>Laboratory of Animal Cruelty</u>
+	In your periphery, you can see that the door to the <u>Laboratory of Animal Cruelty</u>
 	is wide open past the
 	<a href={auxilliaryLivingRoomHref}>Auxilliary Living Room</a>. Something dark lurks within. A
 	sinister invitation..
@@ -35,8 +35,9 @@
 
 {#if livingRoom.observed}
 	<p>
-		In the <u>Living Room</u>, the first thing you notice is the <u>Couch of Pulled Threads</u>.
-		While it's not visible, you sense a <u>Terrible Aura Omitted from the Rug beneath the Couch</u>.
+		In the <u>Living Room</u>, the first thing you notice is the
+		<u>Couch of One Thousand Pulled Threads</u>. While it's not visible, you sense a
+		<u>Terrible Aura Omitted from the Rug beneath the Couch</u>.
 	</p>
 {:else}
 	<form action={ACTIONS.observe_1_living_room} method="POST" use:enhance>
@@ -100,11 +101,15 @@
 		<button>Inspect the rug</button>
 	</form>
 
-	<GrabTheCat {player} {giancarlo} location="living room"></GrabTheCat>
+	<GrabTheCat
+		{player}
+		{giancarlo}
+		catchPercentage={data.giancarloCatchPercentage}
+		location="living room"
+	></GrabTheCat>
 	<br />
 
 	{#if livingRoom.lizardZone.regarded || livingRoom.chair.regarded}
-		<br />
 		<Destinations>
 			{#if livingRoom.lizardZone.regarded}
 				<span>

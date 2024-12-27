@@ -5,7 +5,7 @@ import type { Actions, PageServerLoad } from './$types';
 export const load: PageServerLoad = async () => {
 	return {
 		title: 'living room',
-		description: `In the Living Room, the first thing you notice is the Couch of Pulled Threads. While it's not visible, you sense a Terrible Aura Omitted from the Rug beneath the Couch.`
+		description: `In the Living Room, the first thing you notice is the Couch of One Thousand Pulled Threads. While it's not visible, you sense a Terrible Aura Omitted from the Rug beneath the Couch.`
 	};
 };
 

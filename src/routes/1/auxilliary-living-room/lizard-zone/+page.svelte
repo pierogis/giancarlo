@@ -39,7 +39,6 @@
 			Talk to <u>The Lizard</u>
 		</button>
 	</form>
-	<br />
 {:else}
 	<p in:fade>
 		You talked to <u>The Lizard</u>, and he opened his mouth. He looked hungry.
@@ -107,8 +106,12 @@
 	{/if}
 {/if}
 
-<GrabTheCat {player} {giancarlo} location="lizard zone"></GrabTheCat>
-<br />
+<GrabTheCat
+	{player}
+	{giancarlo}
+	catchPercentage={data.giancarloCatchPercentage}
+	location="lizard zone"
+></GrabTheCat>
 
 <Destinations>
 	<span>

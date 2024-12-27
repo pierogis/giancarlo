@@ -58,38 +58,35 @@
 {/if}
 <hr />
 
-{#if hotelHasBirds}
-	<form action={ACTIONS.pickUp_1_auxilliary_living_room_hotel} method="POST" use:enhance>
-		<input hidden name="item" value="bird" />
-		<button>
-			Pick up <u>Tweety Bird</u>
-		</button>
-	</form>
-	<br />
-{/if}
+<div>
+	{#if hotelHasBirds}
+		<form action={ACTIONS.pickUp_1_auxilliary_living_room_hotel} method="POST" use:enhance>
+			<input hidden name="item" value="bird" />
+			<button>
+				Pick up <u>Tweety Bird</u>
+			</button>
+		</form>
+	{/if}
+	{#if hotelHasBalls}
+		<form action={ACTIONS.pickUp_1_auxilliary_living_room_hotel} method="POST" use:enhance>
+			<input hidden name="item" value="ball" />
+			<button>
+				Pick up <u>1-Inch ⌀ Ball</u>
+			</button>
+		</form>
+	{/if}
+	{#if hotelHasFish}
+		<form action={ACTIONS.pickUp_1_auxilliary_living_room_hotel} method="POST" use:enhance>
+			<input hidden name="item" value="fish" />
+			<button>
+				Pick up <u>Catnip Infused–Crinkle Fish</u>
+			</button>
+		</form>
+	{/if}
+</div>
 
-{#if hotelHasBalls}
-	<form action={ACTIONS.pickUp_1_auxilliary_living_room_hotel} method="POST" use:enhance>
-		<input hidden name="item" value="ball" />
-		<button>
-			Pick up <u>1-Inch ⌀ Ball</u>
-		</button>
-	</form>
-	<br />
-{/if}
-
-{#if hotelHasFish}
-	<form action={ACTIONS.pickUp_1_auxilliary_living_room_hotel} method="POST" use:enhance>
-		<input hidden name="item" value="fish" />
-		<button>
-			Pick up <u>Catnip Infused–Crinkle Fish</u>
-		</button>
-	</form>
-	<br />
-{/if}
-
-<GrabTheCat {player} {giancarlo} location="hotel"></GrabTheCat>
-<br />
+<GrabTheCat {player} {giancarlo} catchPercentage={data.giancarloCatchPercentage} location="hotel"
+></GrabTheCat>
 
 <Destinations>
 	<span>
@@ -108,3 +105,12 @@
 		>
 	</span>
 </Destinations>
+
+<style>
+	div {
+		display: flex;
+		gap: 8px;
+		text-wrap: nowrap;
+		flex-wrap: wrap;
+	}
+</style>

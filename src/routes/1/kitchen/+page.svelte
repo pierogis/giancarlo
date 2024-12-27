@@ -54,8 +54,8 @@
 	<br />
 {/if}
 
-<GrabTheCat {player} {giancarlo} location="kitchen"></GrabTheCat>
-<br />
+<GrabTheCat {player} {giancarlo} catchPercentage={data.giancarloCatchPercentage} location="kitchen"
+></GrabTheCat>
 
 <Destinations>
 	<span>

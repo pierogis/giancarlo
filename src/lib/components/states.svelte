@@ -8,7 +8,6 @@
 	import Giancarlo from './giancarlo.svelte';
 	import Messages from './messages.svelte';
 	import Player from './player.svelte';
-	import { untrack } from 'svelte';
 
 	const {
 		view,
@@ -96,8 +95,5 @@
 	}
 	.view-option.current {
 		color: unset;
-	}
-	.view-option:hover {
-		text-decoration: underline;
 	}
 </style>

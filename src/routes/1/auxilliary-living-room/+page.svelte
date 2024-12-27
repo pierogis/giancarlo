@@ -26,7 +26,7 @@
 </h3>
 
 <p>
-	After a long and arduous journey, you find yourself on the precipice of the the <u
+	After a long and arduous journey, you find yourself on the precipice of the <u
 		>Auxilliary Living Room</u
 	>.
 </p>
@@ -46,11 +46,6 @@
 	<a href={livingRoomHref}>Living Room</a>.
 </p>
 
-<p>
-	In your peripheral, you can see that the door to the <a href={laboratoryHref}
-		>Laboratory of Animal Cruelty</a
-	> is wide open. Something dark lurks within. A sinister invitation..
-</p>
 <hr />
 
 {#if auxilliaryLivingRoom.lizardZone.regarded}
