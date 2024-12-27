@@ -99,9 +99,11 @@
 	</p>
 
 	<form action={ACTIONS.greet_1_doorway} method="POST" use:enhance>
-		<button>Sorry, buddy</button>
-		<button>Hello, handsome</button>
-		<button>Fuck you, <u>Giancarlo</u></button>
+		<div class="forms">
+			<button>Sorry, buddy</button>
+			<button>Hello, handsome</button>
+			<button>Fuck you, <u>Giancarlo</u></button>
+		</div>
 	</form>
 
 	{#if doorway.open}
