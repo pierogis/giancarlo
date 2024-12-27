@@ -1,6 +1,3 @@
-import { PAGES } from '$lib/ROUTES';
-import { syncer } from '$lib/state';
-
 export type Kitchen = {
 	observed: boolean;
 	refridgerator: {
@@ -20,6 +17,7 @@ export type Kitchen = {
 	};
 	inventory: {
 		knives: number;
+		balls: number;
 	};
 };
 export const defaultKitchen: Kitchen = {
@@ -40,14 +38,7 @@ export const defaultKitchen: Kitchen = {
 		faucetRunning: false
 	},
 	inventory: {
-		knives: 1
+		knives: 1,
+		balls: 3
 	}
 };
-
-const kitchenCookieName = 'gc_kitchen';
-
-export const { sync: syncKitchen, delete: deleteKitchen } = syncer(
-	kitchenCookieName,
-	defaultKitchen,
-	PAGES['1_kitchen']
-);

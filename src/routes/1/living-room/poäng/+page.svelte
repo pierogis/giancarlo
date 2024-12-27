@@ -1,14 +1,16 @@
 <script lang="ts">
-	import { PAGES } from '$lib/ROUTES';
+	import { enhance } from '$app/forms';
+	import { Destinations, GrabTheCat } from '$lib/components';
 
-	import Messages from '$lib/messages.svelte';
+	import { ACTIONS, PAGES } from '$lib/ROUTES';
 
 	const { data } = $props();
 
-	const player = $derived(data.player);
-	const poang = $derived(data.poang);
-
-	const messages: string[] = $state([]);
+	const {
+		player,
+		livingRoom: { chair },
+		giancarlo
+	} = $derived(data.state);
 </script>
 
 <h3>
@@ -18,63 +20,68 @@
 <p>An <u>IKEA POÄNG</u> chair with navy blue cushion sits in the living room.</p>
 
 <p>You take a seat and find a great comfort. Your backside starts to itch.</p>
+<hr />
 
-<Messages {messages}></Messages>
+{#if !giancarlo.caught}
+	<form action={ACTIONS.callForCat_1_living_room_poäng} method="POST" use:enhance>
+		<button>
+			Call for <u>The Cat</u>
+		</button>
+	</form>
+{/if}
 
-<button
-	onclick={() => {
-		messages.push('You called for the cat.');
-		messages.push("Giancarlo didn't like that.");
-	}}
->
-	Call for <u>The Cat</u>
-</button>
-
-{#if !poang.regarded}
-	<button
-		onclick={() => {
-			messages.push('You regarded The Itch');
-			poang.regarded = true;
-		}}
-	>
-		Inspect <u>The Itch</u>
-	</button>
+{#if !chair.regarded}
+	<form action={ACTIONS.regardItch_1_living_room_poäng} method="POST" use:enhance>
+		<button>
+			Inspect <u>The Itch</u>
+		</button>
+	</form>
 {:else}
 	<p>The <u>IKEA POÄNG</u> chair is covered in cat hair.</p>
 {/if}
 
 {#if player.inventory.tweetyBirds > 0}
-	<button
-		onclick={() => {
-			messages.push('You struck Tweety Bird');
-			messages.push('Tweety Bird chirps and writhes');
-		}}
-	>
-		Strike <u>Tweety Bird</u>
-	</button>
+	<form action={ACTIONS.strikeBird_1_living_room_poäng} method="POST" use:enhance>
+		<button>
+			Strike <u>Tweety Bird</u>
+		</button>
+	</form>
+	{#if player.inventory.balls > 0 || player.inventory.crinkleFish > 0}
+		<br />
+	{/if}
 {/if}
 
 {#if player.inventory.balls > 0}
-	<button
-		onclick={() => {
-			messages.push('You threw 1-Inch ⌀ Ball');
-			player.inventory.crinkleFish -= 1;
-		}}
-	>
-		Throw <u>1-Inch ⌀ Ball</u>
-	</button>
+	<form action={ACTIONS.throwBall_1_living_room_poäng} method="POST" use:enhance>
+		<button>
+			Throw <u>1-Inch ⌀ Ball</u>
+		</button>
+	</form>
+	{#if player.inventory.crinkleFish > 0}
+		<br />
+	{/if}
 {/if}
 
 {#if player.inventory.crinkleFish > 0}
-	<button
-		onclick={() => {
-			messages.push('You threw Crinkle Fish');
-			player.inventory.crinkleFish -= 1;
-		}}
-	>
-		Throw <u>Crinkle Fish</u>
-	</button>
+	<form action={ACTIONS.throwFish_1_living_room_poäng} method="POST" use:enhance>
+		<button>
+			Throw <u>Catnip–Infused Crinkle Fish</u>
+		</button>
+	</form>
 {/if}
 
-<a href={PAGES['1_auxilliary_living_room_hotel']}>Visit The Hotel</a>
-<a href={PAGES['1_auxilliary_living_room_lizard_zone']}>Talk to <u>The Lizard</u></a>
+<GrabTheCat {player} {giancarlo} location="chair"></GrabTheCat>
+<br />
+
+<Destinations>
+	<span>
+		Check in at <a href={PAGES['1_auxilliary_living_room_hotel']({ statusView: data.statusView })}
+			>{"Giancarlo's Hotel <"}</a
+		>
+	</span>
+	<span>
+		Talk to <a href={PAGES['1_auxilliary_living_room_lizard_zone']({ statusView: data.statusView })}
+			>The Lizard ></a
+		>
+	</span>
+</Destinations>

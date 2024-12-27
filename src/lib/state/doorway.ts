@@ -1,7 +1,5 @@
-import { PAGES } from '$lib/ROUTES';
-import { syncer } from '$lib/state';
-
-export type Door = {
+export type Doorway = {
+	version: number;
 	open: boolean;
 	locked: boolean;
 	entered: boolean;
@@ -21,7 +19,8 @@ export type Door = {
 	};
 };
 
-export const defaultDoor: Door = {
+export const defaultDoorway: Doorway = {
+	version: 0,
 	open: false,
 	locked: false,
 	entered: false,
@@ -40,11 +39,3 @@ export const defaultDoor: Door = {
 		shoes: 2
 	}
 };
-
-export const doorCookieName = 'gc_door';
-
-export const { sync: syncDoor, delete: deleteDoor } = syncer(
-	doorCookieName,
-	defaultDoor,
-	PAGES['1_door']
-);

@@ -1,14 +1,13 @@
-import { syncHotel } from './state';
-
-import type { Actions, PageServerLoad } from './$types';
-import { syncPlayer } from '$lib/player';
 import { fail } from '@sveltejs/kit';
 
-export const load: PageServerLoad = async (event) => {
-	const hotel = syncHotel(event.cookies);
+import { updateState } from '$lib/state';
 
+import type { Actions, PageServerLoad } from './$types';
+
+export const load: PageServerLoad = async () => {
 	return {
-		hotel
+		title: 'hotel',
+		description: 'You approach the shabby looking cardboard boxes in the Auxilliary Living Room.'
 	};
 };
 
@@ -22,57 +21,42 @@ export const actions: Actions = {
 			return fail(400, { item });
 		}
 		if (item === 'bird') {
-			syncHotel(cookies, (hotel) => {
-				hotel.inventory.tweetyBirds -= 1;
-				return hotel;
-			});
-
-			const player = syncPlayer(cookies, (player) => {
-				player.inventory.tweetyBirds -= 1;
-				return player;
+			const { player } = updateState(cookies, (state) => {
+				state.auxilliaryLivingRoom.hotel.inventory.tweetyBirds -= 1;
+				state.player.inventory.tweetyBirds += 1;
+				return state;
 			});
 
 			return {
 				messages: [
-					'You picked up Tweety Bird.',
-					"It's some kind of baby owl. Cruel, but effective.",
+					"You pick up Tweety Bird. It's some kind of baby owl. Cruel, but effective.",
 					`You now have ${player.inventory.balls} Tweety Birds.`
 				]
 			};
 		} else if (item === 'ball') {
-			syncHotel(cookies, (hotel) => {
-				hotel.inventory.balls -= 1;
-				return hotel;
-			});
-
-			const player = syncPlayer(cookies, (player) => {
-				player.inventory.balls -= 1;
-				return player;
+			const { player } = updateState(cookies, (state) => {
+				state.auxilliaryLivingRoom.hotel.inventory.balls -= 1;
+				state.player.inventory.balls += 1;
+				return state;
 			});
 
 			return {
 				messages: [
-					'You picked up 1-Inch ⌀ Ball.',
-					'Marked like a soccer ball.',
+					"You pick up 1-Inch ⌀ Ball. It's marked like a soccer ball.",
 					`You now have ${player.inventory.balls} 1-Inch ⌀ Balls.`
 				]
 			};
 		} else if (item === 'fish') {
-			syncHotel(cookies, (hotel) => {
-				hotel.inventory.crinkleFish -= 1;
-				return hotel;
-			});
-
-			const player = syncPlayer(cookies, (player) => {
-				player.inventory.crinkleFish -= 1;
-				return player;
+			const { player } = updateState(cookies, (state) => {
+				state.auxilliaryLivingRoom.hotel.inventory.crinkleFish -= 1;
+				state.player.inventory.crinkleFish += 1;
+				return state;
 			});
 
 			return {
 				messages: [
-					'You picked up Crinkle Fish.',
-					'It is filled with catnip, but every throw diminishes its potency.',
-					`You now have ${player.inventory.balls} Crinkle Fish.`
+					'You pick up Catnip–Infused Crinkle Fish. It is filled with catnip, but every throw diminishes its potency.',
+					`You now have ${player.inventory.crinkleFish} Catnip–Infused Crinkle Fish.`
 				]
 			};
 		}

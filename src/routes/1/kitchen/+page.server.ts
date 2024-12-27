@@ -1,117 +1,145 @@
-import { syncKitchen } from './state';
+import { updateState } from '$lib/state';
 
 import type { Actions, PageServerLoad } from './$types';
-import { syncPlayer } from '$lib/player';
 
-export const load: PageServerLoad = async (event) => {
-	const kitchen = syncKitchen(event.cookies);
-
+export const load: PageServerLoad = async () => {
 	return {
-		kitchen
+		title: 'kitchen',
+		description: 'A Kitchen could provide you or your companions with sustenance.'
 	};
 };
 
 export const actions: Actions = {
-	observe: (event) => {
-		syncKitchen(event.cookies, (kitchen) => {
-			kitchen.observed = true;
-			return kitchen;
-		});
-	},
-	regardSink: (event) => {
-		syncKitchen(event.cookies, (kitchen) => {
-			kitchen.sink.regarded = true;
-			return kitchen;
-		});
-	},
-	regardRefridgerator: (event) => {
-		syncKitchen(event.cookies, (kitchen) => {
-			kitchen.refridgerator.regarded = true;
-			return kitchen;
-		});
-	},
-	openRefridgerator: (event) => {
-		syncKitchen(event.cookies, (kitchen) => {
-			kitchen.refridgerator.open = true;
-			return kitchen;
-		});
-	},
-	closeRefridgerator: (event) => {
-		syncKitchen(event.cookies, (kitchen) => {
-			kitchen.refridgerator.open = false;
-			return kitchen;
-		});
-	},
-	takeLettuce: (event) => {
-		syncKitchen(event.cookies, (kitchen) => {
-			kitchen.refridgerator.inventory.lettuce.raw -= 1;
-			return kitchen;
-		});
-		syncPlayer(event.cookies, (player) => {
-			player.inventory.lettuce.raw += 1;
-			return player;
+	observe: ({ cookies }) => {
+		updateState(cookies, (state) => {
+			state.kitchen.observed = true;
+			return state;
 		});
 
 		return {
-			messages: ['You took a Raw Lettuce.']
+			messages: ['You observe the Kitchen.']
 		};
 	},
-	drinkBeer: (event) => {
-		syncKitchen(event.cookies, (kitchen) => {
-			kitchen.refridgerator.inventory.beer -= 1;
-			return kitchen;
-		});
-		syncPlayer(event.cookies, (player) => {
-			player.drunkenness += 1;
-			return player;
+	regardSink: ({ cookies }) => {
+		updateState(cookies, (state) => {
+			state.kitchen.sink.regarded = true;
+			return state;
 		});
 
 		return {
-			messages: ['You drank a Beer.']
+			messages: ['You regard the Sink.']
 		};
 	},
-
-	// sink
-	turnOnFaucet: (event) => {
-		syncKitchen(event.cookies, (kitchen) => {
-			kitchen.sink.faucetRunning = true;
-			return kitchen;
-		});
-		return {
-			messages: ['You turned on the Faucet.', "Giancarlo didn't like that."]
-		};
-	},
-	turnOffFaucet: (event) => {
-		syncKitchen(event.cookies, (kitchen) => {
-			kitchen.sink.faucetRunning = false;
-			return kitchen;
-		});
-		return {
-			messages: ['You turned off the Faucet.', "Giancarlo didn't like that."]
-		};
-	},
-	washLettuce: (event) => {
-		syncPlayer(event.cookies, (player) => {
-			player.inventory.lettuce.raw -= 1;
-			player.inventory.lettuce.washed += 1;
-			return player;
+	regardRefridgerator: ({ cookies }) => {
+		updateState(cookies, (state) => {
+			state.kitchen.refridgerator.regarded = true;
+			return state;
 		});
 
 		return {
-			messages: ['You washed the Raw Lettuce']
+			messages: ['You regard the Refridgerator.']
+		};
+	},
+	openRefridgerator: ({ cookies }) => {
+		updateState(cookies, (state) => {
+			state.kitchen.refridgerator.open = true;
+			return state;
+		});
+
+		return {
+			messages: ['You open the Refridgerator.']
+		};
+	},
+	closeRefridgerator: ({ cookies }) => {
+		updateState(cookies, (state) => {
+			state.kitchen.refridgerator.open = false;
+			return state;
+		});
+
+		return {
+			messages: ['You close the Refridgerator.']
+		};
+	},
+	takeLettuce: ({ cookies }) => {
+		updateState(cookies, (state) => {
+			state.kitchen.refridgerator.inventory.lettuce.raw -= 1;
+			state.player.inventory.lettuce.raw += 1;
+			return state;
+		});
+
+		return {
+			messages: ['You take a Raw Lettuce.']
+		};
+	},
+	drinkBeer: ({ cookies }) => {
+		updateState(cookies, (state) => {
+			state.kitchen.refridgerator.inventory.beer -= 1;
+			state.player.emotions.drunkenness += 1;
+			return state;
+		});
+
+		return {
+			messages: ['You drink a Beer.']
 		};
 	},
 
 	// sink
-	chopLettuce: (event) => {
-		syncPlayer(event.cookies, (player) => {
-			player.inventory.lettuce.washed -= 1;
-			player.inventory.lettuce.chopped += 1;
-			return player;
+	turnOnFaucet: ({ cookies }) => {
+		updateState(cookies, (state) => {
+			state.kitchen.sink.faucetRunning = true;
+			state.giancarlo.happiness -= 1;
+			return state;
+		});
+		return {
+			messages: ['You turn on the Faucet.', "Giancarlo doesn't like that."]
+		};
+	},
+	turnOffFaucet: ({ cookies }) => {
+		updateState(cookies, (state) => {
+			state.kitchen.sink.faucetRunning = false;
+			state.giancarlo.happiness -= 1;
+			return state;
+		});
+		return {
+			messages: ['You turn off the Faucet.', "Giancarlo doesn't like that."]
+		};
+	},
+	washLettuce: ({ cookies }) => {
+		updateState(cookies, (state) => {
+			state.player.inventory.lettuce.raw -= 1;
+			state.player.inventory.lettuce.washed += 1;
+			return state;
 		});
 
 		return {
-			messages: ['You chopped the Washed Lettuce']
+			messages: ['You wash the Raw Lettuce.']
+		};
+	},
+
+	// sink
+	chopLettuce: ({ cookies }) => {
+		updateState(cookies, (state) => {
+			state.player.inventory.lettuce.washed -= 1;
+			state.player.inventory.lettuce.chopped += 1;
+			return state;
+		});
+
+		return {
+			messages: ['You chop the Washed Lettuce.']
+		};
+	},
+
+	pickUpBall: (event) => {
+		const { player } = updateState(event.cookies, (state) => {
+			state.kitchen.inventory.balls -= 1;
+			state.player.inventory.balls += 1;
+			return state;
+		});
+		return {
+			messages: [
+				"You pick up 1-Inch ⌀ Ball. It's marked like a soccer ball.",
+				`You now have ${player.inventory.balls} 1-Inch ⌀ Balls.`
+			]
 		};
 	}
 };

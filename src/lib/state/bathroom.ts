@@ -1,8 +1,8 @@
-import { PAGES } from '$lib/ROUTES';
-import { syncer } from '$lib/state';
-
 export type Bathroom = {
 	observed: boolean;
+	inventory: {
+		crinkleFish: number;
+	};
 	pantry: {
 		regarded: boolean;
 		inventory: {
@@ -18,6 +18,9 @@ export type Bathroom = {
 };
 export const defaultBathroom: Bathroom = {
 	observed: false,
+	inventory: {
+		crinkleFish: 0
+	},
 	pantry: {
 		regarded: false,
 		inventory: {
@@ -31,11 +34,3 @@ export const defaultBathroom: Bathroom = {
 		}
 	}
 };
-
-const bathroomCookieName = 'gc_bathroom';
-
-export const { sync: syncBathroom, delete: deleteBathroom } = syncer(
-	bathroomCookieName,
-	defaultBathroom,
-	PAGES['1_bathroom']
-);

@@ -1,14 +1,15 @@
-import type { Player } from '$lib/state';
+import type { State } from '$lib/state';
 
 declare global {
 	namespace App {
 		// interface Error {}
 		interface Locals {
 			resumePathname: string | undefined;
-			player: Player;
+			state: State;
 		}
 		interface PageData {
 			title?: string;
+			description?: string;
 		}
 		// interface PageState {}
 		// interface Platform {}

@@ -1,6 +1,7 @@
-import { PAGES } from './ROUTES';
-import { syncer } from './state';
-
+export type Emotions = {
+	allergyResistance: number;
+	drunkenness: number;
+};
 export type Inventory = {
 	shoes: number;
 	lizardAdvice: number;
@@ -9,16 +10,18 @@ export type Inventory = {
 	crinkleFish: number;
 	toothbrushes: number;
 	lettuce: { raw: number; washed: number; chopped: number };
+	gloves: number;
+	giancarlo: number;
 };
 export type Player = {
-	allergyResistance: number;
-	drunkenness: number;
+	version: number;
+	emotions: Emotions;
 	inventory: Inventory;
 };
 
 export const defaultPlayer: Player = {
-	allergyResistance: 0,
-	drunkenness: 0,
+	version: 0,
+	emotions: { allergyResistance: 0, drunkenness: 0 },
 	inventory: {
 		shoes: 2,
 		lizardAdvice: 0,
@@ -30,14 +33,8 @@ export const defaultPlayer: Player = {
 			raw: 0,
 			washed: 0,
 			chopped: 0
-		}
+		},
+		gloves: 1,
+		giancarlo: 0
 	}
 };
-
-export const playerCookieName = 'gc_player';
-
-export const { sync: syncPlayer, delete: deletePlayer } = syncer(
-	playerCookieName,
-	defaultPlayer,
-	PAGES._ROOT
-);

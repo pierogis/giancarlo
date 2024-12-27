@@ -1,12 +1,14 @@
-import { deleteResume } from '$lib/resume';
-import { deletePlayer } from '$lib/player';
-import { deleteChapter1 } from '../1/reset';
+import { redirect } from '@sveltejs/kit';
+
+import { PAGES } from '$lib/ROUTES';
+
+import { deleteResume, deleteState } from '$lib/state';
+
 import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async ({ event, resolve }) => {
-	deleteResume(event.cookies);
-	deletePlayer(event.cookies);
-	deleteChapter1(event.cookies);
+export const load: PageServerLoad = async ({ cookies }) => {
+	deleteResume(cookies);
+	deleteState(cookies);
 
-	return await resolve(event);
+	redirect(307, PAGES._ROOT);
 };

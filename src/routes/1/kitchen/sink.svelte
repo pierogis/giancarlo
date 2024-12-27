@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import type { Player } from '$lib/player';
-	import { ACTIONS } from '$lib/ROUTES';
 
-	import type { Kitchen } from './state';
+	import { ACTIONS } from '$lib/ROUTES';
+	import type { Player, Kitchen } from '$lib/state';
 
 	const {
 		inventory,
@@ -16,30 +15,28 @@
 
 <h4>The <u>Sink</u></h4>
 {#if sink.regarded}
-	<p><i>You regarded the <u>Sink</u></i></p>
-
 	<p>
-		You take a look at the <u>Lizard Zone</u> to get a sense of the time of day. He's looking rather
-		oblate. A sure sign that he has been roasting under his artificial sun for the last 30 hours.
+		You take a look at the <u>Sink</u>. It occurs to you that this would be the perfect place to
+		wash some vegetables.
 	</p>
 
 	{#if !sink.faucetRunning}
-		<p>The <u>Faucet</u> is not running.</p>
+		<p><i>The <u>Faucet</u> is not running.</i></p>
 		<form action={ACTIONS.turnOnFaucet_1_kitchen} method="POST" use:enhance>
 			<button>
 				Turn on the <u>Faucet</u>
 			</button>
 		</form>
 	{:else}
-		<p>The <u>Faucet</u> is running.</p>
+		<p><i>The <u>Faucet</u> is running.</i></p>
 		{#if inventory.lettuce.raw > 0}
-			<form action={ACTIONS.turnOffFaucet_1_kitchen} method="POST" use:enhance>
+			<form action={ACTIONS.washLettuce_1_kitchen} method="POST" use:enhance class="inline">
 				<button>
 					Wash the <u>Raw Lettuce</u>
 				</button>
 			</form>
 		{/if}
-		<form action={ACTIONS.turnOffFaucet_1_kitchen} method="POST" use:enhance>
+		<form action={ACTIONS.turnOffFaucet_1_kitchen} method="POST" use:enhance class="inline">
 			<button>
 				Turn off the <u>Faucet</u>
 			</button>

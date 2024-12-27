@@ -2,61 +2,75 @@
 	import { enhance } from '$app/forms';
 
 	import { ACTIONS, PAGES } from '$lib/ROUTES';
+
+	import { Destinations, GrabTheCat } from '$lib/components';
 	import CuttingBoard from './cutting-board.svelte';
 	import Refridgerator from './refridgerator.svelte';
 	import Sink from './sink.svelte';
 
-	const { data, form } = $props();
+	const { data } = $props();
 
-	const player = $derived(data.player);
-	const kitchen = $derived(data.kitchen);
+	const { giancarlo, player, kitchen } = $derived(data.state);
 </script>
 
 <h3>The <u>Kitchen</u></h3>
 
 <p>
 	You find yourself in the <u>Kitchen</u> behind you is the
-	<a href={PAGES['1_laboratory']}>Laboratory of Animal Cruelty</a>
-	and the <a href={PAGES['1_bathroom']}>Bathroom</a>. Ahead of you, you can see a <u>Window</u>.
+	<a href={PAGES['1_laboratory']({ statusView: data.statusView })}>Laboratory of Animal Cruelty</a>
+	and the <a href={PAGES['1_bathroom']({ statusView: data.statusView })}>Bathroom</a>. Ahead of you,
+	you can see a <u>Window</u>.
 </p>
 
 <hr />
 
 {#if kitchen.observed}
-	<p><i>You observed the <u>Kitchen</u></i></p>
 	<p>
-		In the <u>Kitchen</u> there is the <u>Refridgerator</u>, the <u>Sink</u>, and the
-		<u>Cutting Board</u>.
+		In the <u>Kitchen</u> there is a <u>Refridgerator</u>, a <u>Sink</u>, and a
+		<u>Cutting Board</u>. {#if kitchen.inventory.balls > 0}As a result of careless throwing, you see
+			<b>
+				{kitchen.inventory.balls}
+				<u>1-Inch ⌀ Ball</u>
+			</b>{#if kitchen.inventory.balls > 1}s{/if} on the ground{/if}
 	</p>
-	<hr />
+
+	{#if kitchen.inventory.balls > 0}
+		<form action={ACTIONS.pickUpBall_1_kitchen} method="POST" use:enhance>
+			<button>
+				Pick up <u>1-Inch ⌀ Ball</u>
+			</button>
+		</form>
+	{/if}
+
 	<Sink inventory={player.inventory} sink={kitchen.sink}></Sink>
 
-	<hr />
 	<Refridgerator refridgerator={kitchen.refridgerator}></Refridgerator>
 
-	<hr />
 	<CuttingBoard inventory={player.inventory} cuttingBoard={kitchen.refridgerator}></CuttingBoard>
 {:else}
 	<form action={ACTIONS.observe_1_kitchen} method="POST" use:enhance>
 		<button>Observe the <u>Kitchen</u></button>
 	</form>
+	<br />
 {/if}
 
-<hr />
+<GrabTheCat {player} {giancarlo} location="kitchen"></GrabTheCat>
+<br />
 
-{#if form && form.messages.length > 0}
-	{#each form.messages || [] as message}
-		<p><i>{message}</i></p>
-	{/each}
-	<hr />
-{/if}
-
-<p>
-	Get the scoop in the <a href={PAGES['1_bathroom']}>Bathroom v</a>
-</p>
-<p>
-	Test your luck at the <a href={PAGES['1_laboratory']}>Laboratory of Animal Cruelty v</a>
-</p>
-<p>
-	Recoup in the <a href={PAGES['1_auxilliary_living_room']}>Auxilliary Living Room v</a>
-</p>
+<Destinations>
+	<span>
+		Get the scoop in the <a href={PAGES['1_bathroom']({ statusView: data.statusView })}
+			>Bathroom v</a
+		>
+	</span>
+	<span>
+		Test your luck at the <a href={PAGES['1_laboratory']({ statusView: data.statusView })}
+			>Laboratory of Animal Cruelty v</a
+		>
+	</span>
+	<span>
+		Recoup in the <a href={PAGES['1_auxilliary_living_room']({ statusView: data.statusView })}
+			>Auxilliary Living Room v</a
+		>
+	</span>
+</Destinations>

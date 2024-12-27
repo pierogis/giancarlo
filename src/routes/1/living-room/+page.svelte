@@ -3,10 +3,16 @@
 
 	import { ACTIONS, PAGES } from '$lib/ROUTES';
 
+	import { Destinations, GrabTheCat } from '$lib/components';
+
 	const { data } = $props();
 
-	const player = $derived(data.player);
-	const livingRoom = $derived(data.livingRoom);
+	const { giancarlo, player, livingRoom } = $derived(data.state);
+
+	const auxilliaryLivingRoomHref = $derived(
+		PAGES['1_auxilliary_living_room']({ statusView: data.statusView })
+	);
+	const poangHref = $derived(PAGES['1_living_room_poäng']({ statusView: data.statusView }));
 </script>
 
 <h3>
@@ -20,9 +26,12 @@
 
 <p>
 	In your peripheral, you can see that the door to the <u>Laboratory of Animal Cruelty</u>
-	is wide open past the <a href={PAGES['1_auxilliary_living_room']}>Auxilliary Living Room</a>.
-	Something dark lurks within. A sinister invitation..
+	is wide open past the
+	<a href={auxilliaryLivingRoomHref}>Auxilliary Living Room</a>. Something dark lurks within. A
+	sinister invitation..
 </p>
+
+<hr />
 
 {#if livingRoom.observed}
 	<p>
@@ -36,7 +45,6 @@
 		</button>
 	</form>
 {/if}
-<hr />
 
 {#if player.inventory.shoes > 0}
 	<p><i>You are wearing shoes.</i></p>
@@ -57,39 +65,27 @@
 		</form>
 	{/if}
 {/if}
-<hr />
 
 {#if livingRoom.observed}
 	{#if livingRoom.lizardZone.regarded}
-		<p><i>You regarded the <u>Lizard Zone</u></i></p>
-
 		<p>
 			You see that the <u>Auxilliary Living Room</u> contains a <u>Lizard Zone</u> and a
 			<u>Hotel</u>. Further down the hallway, well.. let's not mention it.
 		</p>
-
-		<p>
-			Recoup in the <a href={PAGES['1_auxilliary_living_room']}>Auxilliary Living Room ^</a>
-		</p>
 	{:else}
+		<br />
 		<form action={ACTIONS.regardLizard_1_living_room} method="POST" use:enhance>
 			<button>
 				Check out <u>The Lizard</u>
 			</button>
 		</form>
+		<br />
 	{/if}
-	<hr />
 
 	{#if livingRoom.chair.regarded}
-		<p><i>You regarded the <u>IKEA POÄNG</u> chair.</i></p>
-
 		<p>
 			You regard the <u>IKEA POÄNG</u> chair sitting at the near end of the rug. An apparent comfort
 			begs you to take a load off.
-		</p>
-
-		<p>
-			Talk to the <a href={PAGES['1_living_room_poäng']}>IKEA POÄNG ></a> chair
 		</p>
 	{:else}
 		<form action={ACTIONS.regardChair_1_living_room} method="POST" use:enhance>
@@ -97,13 +93,29 @@
 				Check out the <u>IKEA POÄNG</u> chair
 			</button>
 		</form>
+		<br />
 	{/if}
 
-	<hr />
-	{#each { length: livingRoom.rug.inspections }}
-		<p><i>You inspected the <u>Rug</u>. Something seems off about it.</i></p>
-	{/each}
 	<form action={ACTIONS.inspectRug_1_living_room} method="POST" use:enhance>
 		<button>Inspect the rug</button>
 	</form>
+
+	<GrabTheCat {player} {giancarlo} location="living room"></GrabTheCat>
+	<br />
+
+	{#if livingRoom.lizardZone.regarded || livingRoom.chair.regarded}
+		<br />
+		<Destinations>
+			{#if livingRoom.lizardZone.regarded}
+				<span>
+					Recoup in the <a href={auxilliaryLivingRoomHref}>Auxilliary Living Room ^</a>
+				</span>
+			{/if}
+			{#if livingRoom.chair.regarded}
+				<span>
+					Talk to the <a href={poangHref}>IKEA POÄNG ></a> chair
+				</span>
+			{/if}
+		</Destinations>
+	{/if}
 {/if}

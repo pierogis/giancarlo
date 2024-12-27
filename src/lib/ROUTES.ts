@@ -12,16 +12,57 @@ export const PAGES = {
 	_ROOT: `/`,
 	'0': `/0`,
 	'1': `/1`,
-	'1_auxilliary_living_room': `/1/auxilliary-living-room`,
-	'1_auxilliary_living_room_hotel': `/1/auxilliary-living-room/hotel`,
-	'1_auxilliary_living_room_lizard_zone': `/1/auxilliary-living-room/lizard-zone`,
-	'1_bathroom': `/1/bathroom`,
-	'1_door': `/1/door`,
-	'1_kitchen': `/1/kitchen`,
-	'1_laboratory': `/1/laboratory`,
-	'1_living_room': `/1/living-room`,
-	'1_living_room_poäng': `/1/living-room/poäng`,
-	'2': `/2`
+	'1_auxilliary_living_room': (params?: { statusView?: 'messages' | 'player' | 'giancarlo' }) => {
+		params = params ?? {};
+		params.statusView = params.statusView ?? 'messages';
+		return `/1/auxilliary-living-room${appendSp({ statusView: params.statusView })}`;
+	},
+	'1_auxilliary_living_room_hotel': (params?: {
+		statusView?: 'messages' | 'player' | 'giancarlo';
+	}) => {
+		params = params ?? {};
+		params.statusView = params.statusView ?? 'messages';
+		return `/1/auxilliary-living-room/hotel${appendSp({ statusView: params.statusView })}`;
+	},
+	'1_auxilliary_living_room_lizard_zone': (params?: {
+		statusView?: 'messages' | 'player' | 'giancarlo';
+	}) => {
+		params = params ?? {};
+		params.statusView = params.statusView ?? 'messages';
+		return `/1/auxilliary-living-room/lizard-zone${appendSp({ statusView: params.statusView })}`;
+	},
+	'1_bathroom': (params?: { statusView?: 'messages' | 'player' | 'giancarlo' }) => {
+		params = params ?? {};
+		params.statusView = params.statusView ?? 'messages';
+		return `/1/bathroom${appendSp({ statusView: params.statusView })}`;
+	},
+	'1_doorway': (params?: { statusView?: 'messages' | 'player' | 'giancarlo' }) => {
+		params = params ?? {};
+		params.statusView = params.statusView ?? 'messages';
+		return `/1/doorway${appendSp({ statusView: params.statusView })}`;
+	},
+	'1_kitchen': (params?: { statusView?: 'messages' | 'player' | 'giancarlo' }) => {
+		params = params ?? {};
+		params.statusView = params.statusView ?? 'messages';
+		return `/1/kitchen${appendSp({ statusView: params.statusView })}`;
+	},
+	'1_laboratory': (params?: { statusView?: 'messages' | 'player' | 'giancarlo' }) => {
+		params = params ?? {};
+		params.statusView = params.statusView ?? 'messages';
+		return `/1/laboratory${appendSp({ statusView: params.statusView })}`;
+	},
+	'1_living_room': (params?: { statusView?: 'messages' | 'player' | 'giancarlo' }) => {
+		params = params ?? {};
+		params.statusView = params.statusView ?? 'messages';
+		return `/1/living-room${appendSp({ statusView: params.statusView })}`;
+	},
+	'1_living_room_poäng': (params?: { statusView?: 'messages' | 'player' | 'giancarlo' }) => {
+		params = params ?? {};
+		params.statusView = params.statusView ?? 'messages';
+		return `/1/living-room/poäng${appendSp({ statusView: params.statusView })}`;
+	},
+	'2': `/2`,
+	reset: `/reset`
 };
 
 /**
@@ -33,6 +74,9 @@ export const SERVERS = {};
  * ACTIONS
  */
 export const ACTIONS = {
+	grabCat_1: `/1?/grabCat`,
+	releaseCat_1: `/1?/releaseCat`,
+	brushCatTeeth_1: `/1?/brushCatTeeth`,
 	regardLizard_1_auxilliary_living_room: `/1/auxilliary-living-room?/regardLizard`,
 	pickUp_1_auxilliary_living_room_hotel: `/1/auxilliary-living-room/hotel?/pickUp`,
 	talkToLizard_1_auxilliary_living_room_lizard_zone: `/1/auxilliary-living-room/lizard-zone?/talkToLizard`,
@@ -43,19 +87,20 @@ export const ACTIONS = {
 	takeZyrtec_1_bathroom: `/1/bathroom?/takeZyrtec`,
 	regardCabinet_1_bathroom: `/1/bathroom?/regardCabinet`,
 	grabToothbrush_1_bathroom: `/1/bathroom?/grabToothbrush`,
-	takeOffShoes_1_door: `/1/door?/takeOffShoes`,
-	putOnShoes_1_door: `/1/door?/putOnShoes`,
-	open_1_door: `/1/door?/open`,
-	close_1_door: `/1/door?/close`,
-	enter_1_door: `/1/door?/enter`,
-	leave_1_door: `/1/door?/leave`,
-	greet_1_door: `/1/door?/greet`,
-	regardDeadbolt_1_door: `/1/door?/regardDeadbolt`,
-	regardKnobLock_1_door: `/1/door?/regardKnobLock`,
-	tryDeadboltTeethUp_1_door: `/1/door?/tryDeadboltTeethUp`,
-	tryDeadboltTeethDown_1_door: `/1/door?/tryDeadboltTeethDown`,
-	tryKnobLockTeethUp_1_door: `/1/door?/tryKnobLockTeethUp`,
-	tryKnobLockTeethDown_1_door: `/1/door?/tryKnobLockTeethDown`,
+	pickUpFish_1_bathroom: `/1/bathroom?/pickUpFish`,
+	takeOffShoes_1_doorway: `/1/doorway?/takeOffShoes`,
+	putOnShoes_1_doorway: `/1/doorway?/putOnShoes`,
+	open_1_doorway: `/1/doorway?/open`,
+	close_1_doorway: `/1/doorway?/close`,
+	enter_1_doorway: `/1/doorway?/enter`,
+	leave_1_doorway: `/1/doorway?/leave`,
+	greet_1_doorway: `/1/doorway?/greet`,
+	regardDeadbolt_1_doorway: `/1/doorway?/regardDeadbolt`,
+	regardKnobLock_1_doorway: `/1/doorway?/regardKnobLock`,
+	tryDeadboltTeethUp_1_doorway: `/1/doorway?/tryDeadboltTeethUp`,
+	tryDeadboltTeethDown_1_doorway: `/1/doorway?/tryDeadboltTeethDown`,
+	tryKnobLockTeethUp_1_doorway: `/1/doorway?/tryKnobLockTeethUp`,
+	tryKnobLockTeethDown_1_doorway: `/1/doorway?/tryKnobLockTeethDown`,
 	observe_1_kitchen: `/1/kitchen?/observe`,
 	regardSink_1_kitchen: `/1/kitchen?/regardSink`,
 	regardRefridgerator_1_kitchen: `/1/kitchen?/regardRefridgerator`,
@@ -67,12 +112,20 @@ export const ACTIONS = {
 	turnOffFaucet_1_kitchen: `/1/kitchen?/turnOffFaucet`,
 	washLettuce_1_kitchen: `/1/kitchen?/washLettuce`,
 	chopLettuce_1_kitchen: `/1/kitchen?/chopLettuce`,
+	pickUpBall_1_kitchen: `/1/kitchen?/pickUpBall`,
 	observe_1_living_room: `/1/living-room?/observe`,
 	takeOffShoes_1_living_room: `/1/living-room?/takeOffShoes`,
 	putOnShoes_1_living_room: `/1/living-room?/putOnShoes`,
 	regardLizard_1_living_room: `/1/living-room?/regardLizard`,
 	regardChair_1_living_room: `/1/living-room?/regardChair`,
-	inspectRug_1_living_room: `/1/living-room?/inspectRug`
+	inspectRug_1_living_room: `/1/living-room?/inspectRug`,
+	sit_1_living_room_poäng: `/1/living-room/poäng?/sit`,
+	stand_1_living_room_poäng: `/1/living-room/poäng?/stand`,
+	callForCat_1_living_room_poäng: `/1/living-room/poäng?/callForCat`,
+	regardItch_1_living_room_poäng: `/1/living-room/poäng?/regardItch`,
+	strikeBird_1_living_room_poäng: `/1/living-room/poäng?/strikeBird`,
+	throwBall_1_living_room_poäng: `/1/living-room/poäng?/throwBall`,
+	throwFish_1_living_room_poäng: `/1/living-room/poäng?/throwFish`
 };
 
 /**
@@ -156,15 +209,19 @@ export type KIT_ROUTES = {
 		'1_auxilliary_living_room_hotel': never;
 		'1_auxilliary_living_room_lizard_zone': never;
 		'1_bathroom': never;
-		'1_door': never;
+		'1_doorway': never;
 		'1_kitchen': never;
 		'1_laboratory': never;
 		'1_living_room': never;
 		'1_living_room_poäng': never;
 		'2': never;
+		reset: never;
 	};
 	SERVERS: Record<string, never>;
 	ACTIONS: {
+		grabCat_1: never;
+		releaseCat_1: never;
+		brushCatTeeth_1: never;
 		regardLizard_1_auxilliary_living_room: never;
 		pickUp_1_auxilliary_living_room_hotel: never;
 		talkToLizard_1_auxilliary_living_room_lizard_zone: never;
@@ -175,19 +232,20 @@ export type KIT_ROUTES = {
 		takeZyrtec_1_bathroom: never;
 		regardCabinet_1_bathroom: never;
 		grabToothbrush_1_bathroom: never;
-		takeOffShoes_1_door: never;
-		putOnShoes_1_door: never;
-		open_1_door: never;
-		close_1_door: never;
-		enter_1_door: never;
-		leave_1_door: never;
-		greet_1_door: never;
-		regardDeadbolt_1_door: never;
-		regardKnobLock_1_door: never;
-		tryDeadboltTeethUp_1_door: never;
-		tryDeadboltTeethDown_1_door: never;
-		tryKnobLockTeethUp_1_door: never;
-		tryKnobLockTeethDown_1_door: never;
+		pickUpFish_1_bathroom: never;
+		takeOffShoes_1_doorway: never;
+		putOnShoes_1_doorway: never;
+		open_1_doorway: never;
+		close_1_doorway: never;
+		enter_1_doorway: never;
+		leave_1_doorway: never;
+		greet_1_doorway: never;
+		regardDeadbolt_1_doorway: never;
+		regardKnobLock_1_doorway: never;
+		tryDeadboltTeethUp_1_doorway: never;
+		tryDeadboltTeethDown_1_doorway: never;
+		tryKnobLockTeethUp_1_doorway: never;
+		tryKnobLockTeethDown_1_doorway: never;
 		observe_1_kitchen: never;
 		regardSink_1_kitchen: never;
 		regardRefridgerator_1_kitchen: never;
@@ -199,13 +257,21 @@ export type KIT_ROUTES = {
 		turnOffFaucet_1_kitchen: never;
 		washLettuce_1_kitchen: never;
 		chopLettuce_1_kitchen: never;
+		pickUpBall_1_kitchen: never;
 		observe_1_living_room: never;
 		takeOffShoes_1_living_room: never;
 		putOnShoes_1_living_room: never;
 		regardLizard_1_living_room: never;
 		regardChair_1_living_room: never;
 		inspectRug_1_living_room: never;
+		sit_1_living_room_poäng: never;
+		stand_1_living_room_poäng: never;
+		callForCat_1_living_room_poäng: never;
+		regardItch_1_living_room_poäng: never;
+		strikeBird_1_living_room_poäng: never;
+		throwBall_1_living_room_poäng: never;
+		throwFish_1_living_room_poäng: never;
 	};
 	LINKS: Record<string, never>;
-	Params: Record<string, never>;
+	Params: { statusView: never };
 };

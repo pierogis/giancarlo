@@ -1,24 +1,24 @@
 import type { Handle } from '@sveltejs/kit';
 
 import { PAGES } from '$lib/ROUTES';
-import { syncPlayer } from '$lib/player';
-import { syncResume } from '$lib/resume';
+import { updateState, updateResume } from '$lib/state';
 
 export const handle: Handle = async ({ event, resolve }) => {
-	const resume = syncResume(event.cookies, (prev) => {
+	const resume = updateResume(event.cookies, (prev) => {
 		const pathname = event.url.pathname.toString();
-		if (pathname !== PAGES[0]) {
-			return { pathname };
-		} else {
-			return { pathname: prev.pathname };
+		if (pathname !== PAGES._ROOT) {
+			prev.pathname = pathname;
 		}
+		return prev;
 	});
 
-	event.locals.resumePathname = resume.pathname;
+	if (resume.pathname !== PAGES._ROOT) {
+		event.locals.resumePathname = resume.pathname;
+	}
 
-	const player = syncPlayer(event.cookies);
+	const state = updateState(event.cookies);
 
-	event.locals.player = player;
+	event.locals.state = state;
 
 	return await resolve(event);
 };

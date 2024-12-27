@@ -21,6 +21,13 @@
 </p>
 
 {#if data.resumePathname}
-	<a href={data.resumePathname}>Resume</a>
+	<p>
+		<a href={data.resumePathname}>Resume</a>
+	</p>
+	<p>
+		<a href={PAGES.reset}>Reset</a>
+	</p>
 {/if}
-<a href={PAGES[0]}>Prologue</a>
+<p>
+	<a href={PAGES[0]}>Prologue</a>
+</p>

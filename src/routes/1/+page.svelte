@@ -6,4 +6,4 @@
 
 <p>You find yourself at the <u>Doorway of the Soul</u>.</p>
 
-<a href={PAGES['1_door']}>Try the door</a>
+<a href={PAGES['1_doorway']({ statusView: 'messages' })}>Try the <u>Door</u></a>

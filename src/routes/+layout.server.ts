@@ -1,7 +1,13 @@
 import type { LayoutServerLoad } from './$types';
 
-export const load: LayoutServerLoad = async (event) => {
+export const load: LayoutServerLoad = async ({ locals, url }) => {
+	const statusView = (url.searchParams.get('statusView') || 'messages') as
+		| 'messages'
+		| 'player'
+		| 'giancarlo';
+
 	return {
-		player: event.locals.player
+		state: locals.state,
+		statusView
 	};
 };

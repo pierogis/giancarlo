@@ -1,54 +1,52 @@
-import { syncBathroom } from './state';
+import { updateState } from '$lib/state';
 
 import type { Actions, PageServerLoad } from './$types';
-import { syncPlayer } from '$lib/player';
 
-export const load: PageServerLoad = async (event) => {
-	const bathroom = syncBathroom(event.cookies);
-
+export const load: PageServerLoad = async () => {
 	return {
 		title: 'bathroom',
-		bathroom
+		description: 'BATHROOM PLACEHOLDER TEXT'
 	};
 };
 
 export const actions: Actions = {
 	observe: (event) => {
-		syncBathroom(event.cookies, (bathroom) => {
-			bathroom.observed = true;
-			return bathroom;
-		});
-	},
-	regardPantry: (event) => {
-		syncBathroom(event.cookies, (bathroom) => {
-			bathroom.pantry.regarded = true;
-			return bathroom;
+		updateState(event.cookies, (state) => {
+			state.bathroom.observed = true;
+			return state;
 		});
 
 		return {
-			messages: ['You regarded the Pantry.']
+			messages: ['You observe the Bathroom.']
+		};
+	},
+	regardPantry: (event) => {
+		updateState(event.cookies, (state) => {
+			state.bathroom.pantry.regarded = true;
+			return state;
+		});
+
+		return {
+			messages: ['You regard the Pantry.']
 		};
 	},
 	takeZyrtec: (event) => {
 		const messages = [];
 
-		syncBathroom(event.cookies, (bathroom) => {
-			bathroom.pantry.inventory.zyrtec -= 1;
-			return bathroom;
-		});
-		const player = syncPlayer(event.cookies, (player) => {
-			player.allergyResistance += 1;
-			return player;
+		const { player } = updateState(event.cookies, (state) => {
+			state.bathroom.pantry.inventory.zyrtec -= 1;
+			state.player.emotions.allergyResistance += 1;
+			return state;
 		});
 
 		messages.push('You popped a Zyrtec.');
-		if (player.allergyResistance > 3 && player.allergyResistance < 8) {
+		if (player.emotions.allergyResistance > 3 && player.emotions.allergyResistance < 8) {
 			messages.push("Ok maybe that's enough Zyrtec.");
-		} else if (player.allergyResistance === 8) {
+		} else if (player.emotions.allergyResistance === 8) {
 			messages.push('Things are starting to get strange.');
-		} else if (player.allergyResistance === 15) {
+		} else if (player.emotions.allergyResistance === 15) {
 			messages.push('Things are getting stranger.');
-		} else if (player.allergyResistance === 20) {
+		} else if (player.emotions.allergyResistance === 20) {
 			messages.push('God rewards your bravery.');
 			messages.push('You feel more in tune with the natural world.');
 		}
@@ -58,27 +56,38 @@ export const actions: Actions = {
 		};
 	},
 	regardCabinet: (event) => {
-		syncBathroom(event.cookies, (bathroom) => {
-			bathroom.cabinet.regarded = true;
-			return bathroom;
+		updateState(event.cookies, (state) => {
+			state.bathroom.cabinet.regarded = true;
+			return state;
 		});
 
 		return {
-			messages: ['You regarded the Cabinet.']
+			messages: ['You regard the Cabinet.']
 		};
 	},
 	grabToothbrush: (event) => {
-		syncBathroom(event.cookies, (bathroom) => {
-			bathroom.cabinet.inventory.toothbrushes -= 1;
-			return bathroom;
-		});
-		syncPlayer(event.cookies, (player) => {
-			player.inventory.toothbrushes += 1;
-			return player;
+		updateState(event.cookies, (state) => {
+			state.bathroom.cabinet.inventory.toothbrushes -= 1;
+			state.player.inventory.toothbrushes += 1;
+			return state;
 		});
 
 		return {
-			messages: ['You grabbed the Thoroughly Exhausted Toothbrush.']
+			messages: ['You grab the Thoroughly Exhausted Toothbrush.']
+		};
+	},
+	pickUpFish: (event) => {
+		const { player } = updateState(event.cookies, (state) => {
+			state.bathroom.inventory.crinkleFish -= 1;
+			state.player.inventory.crinkleFish += 1;
+			return state;
+		});
+
+		return {
+			messages: [
+				'You pick up Catnip–Infused Crinkle Fish. It is filled with catnip, but every throw diminishes its potency.',
+				`You now have ${player.inventory.crinkleFish} Catnip–Infused Crinkle Fish.`
+			]
 		};
 	}
 };

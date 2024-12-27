@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import type { Inventory } from '$lib/player';
 
 	import { ACTIONS } from '$lib/ROUTES';
-	import type { Kitchen } from './state';
+	import type { Inventory, Kitchen } from '$lib/state';
 
 	const {
 		inventory,
@@ -16,9 +15,7 @@
 
 <h4>The <u>Cutting Board</u></h4>
 {#if cuttingBoard.regarded}
-	<p><i>You regarded the <u>Cutting Board</u>.</i></p>
-
-	<p>CUTTING BOARD TEXT.</p>
+	<p>Bagel crumbs adorn the <u>Cutting Board</u>.</p>
 
 	{#if inventory.lettuce.washed > 0}
 		<p><i>You have {inventory.lettuce.washed} <u>Washed Lettuce</u>.</i></p>
@@ -28,9 +25,11 @@
 				Chop the <u>Raw Lettuce</u>
 			</button>
 		</form>
+		<br />
 	{/if}
 {:else}
 	<form action={ACTIONS.regardRefridgerator_1_kitchen} method="POST" use:enhance>
 		<button>Inspect the <u>Cutting Board</u></button>
 	</form>
+	<br />
 {/if}

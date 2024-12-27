@@ -1,21 +1,23 @@
+import { updateState } from '$lib/state';
 import type { Actions, PageServerLoad } from './$types';
-import { syncAuxilliaryLivingRoom } from './state';
 
-export const load: PageServerLoad = async (event) => {
-	const auxilliaryLivingRoom = syncAuxilliaryLivingRoom(event.cookies);
-
+export const load: PageServerLoad = async () => {
 	return {
-		auxilliaryLivingRoom
+		title: 'auxilliary living room',
+		description:
+			'After a long and arduous journey, you find yourself on the precipice of the the Auxilliary Living Room.'
 	};
 };
 
 export const actions: Actions = {
 	regardLizard: (event) => {
-		syncAuxilliaryLivingRoom(event.cookies, (auxilliaryLivingRoom) => {
-			auxilliaryLivingRoom.lizardZone.regarded = true;
-			return auxilliaryLivingRoom;
+		updateState(event.cookies, (state) => {
+			state.auxilliaryLivingRoom.lizardZone.regarded = true;
+			return state;
 		});
 
-		return {};
+		return {
+			messages: ['You regard The Lizard']
+		};
 	}
 };

@@ -1,60 +1,75 @@
-import { syncLivingRoom } from './state';
+import { updateState } from '$lib/state';
 
 import type { Actions, PageServerLoad } from './$types';
-import { syncPlayer } from '$lib/player';
 
-export const load: PageServerLoad = async (event) => {
-	const livingRoom = syncLivingRoom(event.cookies);
-
+export const load: PageServerLoad = async () => {
 	return {
 		title: 'living room',
-		livingRoom
+		description: `In the Living Room, the first thing you notice is the Couch of Pulled Threads. While it's not visible, you sense a Terrible Aura Omitted from the Rug beneath the Couch.`
 	};
 };
 
 export const actions: Actions = {
 	observe: (event) => {
-		syncLivingRoom(event.cookies, (livingRoom) => {
-			livingRoom.observed = true;
-			return livingRoom;
+		updateState(event.cookies, (state) => {
+			state.livingRoom.observed = true;
+			return state;
 		});
+
+		return {
+			messages: ['You observe the Living Room.']
+		};
 	},
 	takeOffShoes: (event) => {
-		syncPlayer(event.cookies, (player) => {
-			player.inventory.shoes -= 2;
-			return player;
+		updateState(event.cookies, (state) => {
+			state.player.inventory.shoes -= 2;
+			state.livingRoom.inventory.shoes += 2;
+			return state;
 		});
-		syncLivingRoom(event.cookies, (livingRoom) => {
-			livingRoom.inventory.shoes += 2;
-			return livingRoom;
-		});
+
+		return {
+			messages: ['You put on Shoes.']
+		};
 	},
 	putOnShoes: (event) => {
-		syncPlayer(event.cookies, (player) => {
-			player.inventory.shoes += 2;
-			return player;
+		updateState(event.cookies, (state) => {
+			state.player.inventory.shoes += 2;
+			state.livingRoom.inventory.shoes -= 2;
+			return state;
 		});
-		syncLivingRoom(event.cookies, (livingRoom) => {
-			livingRoom.inventory.shoes -= 2;
-			return livingRoom;
-		});
+
+		return {
+			messages: ['You take off Shoes.']
+		};
 	},
 	regardLizard: (event) => {
-		syncLivingRoom(event.cookies, (livingRoom) => {
-			livingRoom.lizardZone.regarded = true;
-			return livingRoom;
+		updateState(event.cookies, (state) => {
+			state.livingRoom.lizardZone.regarded = true;
+			return state;
 		});
+
+		return {
+			messages: ['You regard the Lizard Zone.']
+		};
 	},
 	regardChair: (event) => {
-		syncLivingRoom(event.cookies, (livingRoom) => {
-			livingRoom.chair.regarded = true;
-			return livingRoom;
+		updateState(event.cookies, (state) => {
+			state.livingRoom.chair.regarded = true;
+			return state;
 		});
+
+		return {
+			messages: ['You regard the IKEA POÄNG chair.']
+		};
 	},
 	inspectRug: (event) => {
-		syncLivingRoom(event.cookies, (livingRoom) => {
-			livingRoom.rug.inspections += 1;
-			return livingRoom;
+		updateState(event.cookies, (state) => {
+			state.livingRoom.rug.inspections += 1;
+			return state;
 		});
+
+		return {
+			messages: ['You inspect the rug. Something seems off about it.']
+		};
 	}
 };

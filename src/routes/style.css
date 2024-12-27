@@ -1,0 +1,79 @@
+@font-face {
+	font-family: 'Lora';
+	src: url('/fonts/Lora-VariableFont_wght.ttf') format('truetype-variations'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+	font-style: normal;
+	font-weight: 1 999;
+}
+@font-face {
+	font-family: 'Lora';
+	src: url('/fonts/Lora-Italic-VariableFont_wght.ttf') format('truetype-variations'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+	font-style: italic;
+	font-weight: 1 999;
+}
+
+:root {
+	font-family: 'Lora';
+}
+a {
+	color: blue;
+}
+
+button {
+	border: 1px solid grey;
+	border-bottom-width: 2px;
+	border-radius: 4px;
+	margin: 0;
+	padding: 8px;
+	width: auto;
+	overflow: visible;
+
+	background: transparent;
+
+	/* inherit font & color from ancestor */
+	color: inherit;
+	font: inherit;
+
+	/* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+	line-height: normal;
+
+	/* Corrects font smoothing for webkit */
+	-webkit-font-smoothing: inherit;
+	-moz-osx-font-smoothing: inherit;
+
+	/* Corrects inability to style clickable `input` types in iOS */
+	appearance: none;
+	-webkit-appearance: none;
+
+	font-family: monospace;
+}
+
+button:hover {
+	background-color: lightblue;
+}
+button:active {
+	transform: translateY(1px);
+}
+
+/* Remove excess padding and border in Firefox 4+ */
+button::-moz-focus-inner {
+	border: 0;
+	padding: 0;
+}
+
+table {
+	table-layout: fixed;
+	border-collapse: collapse;
+	border: 1px solid black;
+	text-align: right;
+}
+tbody:not(:first-child) {
+	border-top: 2px solid black;
+}
+td {
+	border: 1px solid black;
+	padding: 4px;
+}
+
+.inline {
+	display: inline;
+}

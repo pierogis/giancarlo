@@ -1,12 +1,16 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import Messages from '$lib/messages.svelte';
+	import { Destinations, GrabTheCat } from '$lib/components';
 
 	import { ACTIONS, PAGES } from '$lib/ROUTES.js';
 
-	const { data, form } = $props();
+	const { data } = $props();
 
-	const hotel = $derived(data.hotel);
+	const {
+		player,
+		giancarlo,
+		auxilliaryLivingRoom: { hotel }
+	} = $derived(data.state);
 
 	const hotelHasBirds = $derived(hotel.inventory.tweetyBirds > 0);
 	const hotelHasBalls = $derived(hotel.inventory.balls > 0);
@@ -18,7 +22,8 @@
 	<u>Giancarlo's Hotel</u>
 </h3>
 <p>
-	You approach the shabby looking cardboard boxes in the <a href={PAGES['1_auxilliary_living_room']}
+	You approach the shabby looking cardboard boxes in the <a
+		href={PAGES['1_auxilliary_living_room']({ statusView: data.statusView })}
 		>Auxilliary Living Room</a
 	>.
 </p>
@@ -44,7 +49,7 @@
 		{/if}
 		{#if hotelHasFish}
 			{#if hotelHasBirds && hotelHasBalls}and{/if}
-			<b>{hotel.inventory.crinkleFish} <u>Catnip Infused Crinkle Fish</u></b>
+			<b>{hotel.inventory.crinkleFish} <u>Catnip–Infused Crinkle Fish</u></b>
 		{/if}.
 	{/if}
 </p>
@@ -60,7 +65,7 @@
 			Pick up <u>Tweety Bird</u>
 		</button>
 	</form>
-	<hr />
+	<br />
 {/if}
 
 {#if hotelHasBalls}
@@ -70,32 +75,36 @@
 			Pick up <u>1-Inch ⌀ Ball</u>
 		</button>
 	</form>
-	<hr />
+	<br />
 {/if}
 
 {#if hotelHasFish}
 	<form action={ACTIONS.pickUp_1_auxilliary_living_room_hotel} method="POST" use:enhance>
 		<input hidden name="item" value="fish" />
 		<button>
-			Pick up <u>Catnip Infused Crinkle Fish</u>
+			Pick up <u>Catnip Infused–Crinkle Fish</u>
 		</button>
 	</form>
-	<hr />
+	<br />
 {/if}
 
-{#if form?.messages && form.messages.length > 0}
-	{#each form.messages || [] as message}
-		<p><i>{message}</i></p>
-	{/each}
-	<hr />
-{/if}
+<GrabTheCat {player} {giancarlo} location="hotel"></GrabTheCat>
+<br />
 
-<p>
-	Talk to <a href={PAGES['1_auxilliary_living_room_lizard_zone']}>The Lizard ></a>
-</p>
-<p>
-	Excuse yourself to <a href={PAGES['1_bathroom']}>The Bathroom ^</a>
-</p>
-<p>
-	Recoup in the <a href={PAGES['1_auxilliary_living_room']}>Auxilliary Living Room v</a>
-</p>
+<Destinations>
+	<span>
+		Talk to <a href={PAGES['1_auxilliary_living_room_lizard_zone']({ statusView: data.statusView })}
+			>The Lizard ></a
+		>
+	</span>
+	<span>
+		Excuse yourself to <a href={PAGES['1_bathroom']({ statusView: data.statusView })}
+			>The Bathroom ^</a
+		>
+	</span>
+	<span>
+		Recoup in the <a href={PAGES['1_auxilliary_living_room']({ statusView: data.statusView })}
+			>Auxilliary Living Room v</a
+		>
+	</span>
+</Destinations>
